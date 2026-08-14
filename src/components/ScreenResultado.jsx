@@ -1,5 +1,6 @@
 // src/components/ScreenResultado.jsx
 import LoadingCinematografico from "./LoadingCinematografico";
+import PropTypes from "prop-types";
 import { useState, useEffect, useCallback, useRef } from "react";
 import CardCorte from "./CardCorte";
 import FavoritosDrawer from "./FavoritosDrawer";
@@ -50,7 +51,7 @@ const FRASES_HERO = {
   street: ["Esse estilo ficou muito autêntico.", "Street culture no seu melhor.", "Identidade forte demais."],
 };
 
-function getFraseHero(estilo, corteNome) {
+function getFraseHero(estilo) {
   const frases = FRASES_HERO[estilo] ?? ["Esse corte ficou incrível.", "Combina muito com você.", "Resultado premium."];
   return frases[Math.floor(Math.random() * frases.length)];
 }
@@ -63,6 +64,20 @@ function agruparPorOrigem(cards) {
     variacoes: cards.filter(c => c.origemId === r.id),
   }));
 }
+
+const resultadoCardShape = PropTypes.shape({
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  status: PropTypes.oneOf(["pending", "loading", "success", "error"]),
+  imagemBase64: PropTypes.string,
+  origemId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  corteNome: PropTypes.string,
+  corte: PropTypes.shape({
+    nome: PropTypes.string,
+  }),
+  corteObj: PropTypes.shape({
+    nome: PropTypes.string,
+  }),
+});
 
 async function baixarImagem(base64, nome) {
   try {
@@ -85,7 +100,7 @@ async function baixarImagem(base64, nome) {
 // ── Hero Card ─────────────────────────────────────────────────
 function HeroCard({ card, isFavorito, onFavoritar, onVariar, onVerDetalhe, estilo, fotoBase64 }) {
   const [imgLoaded, setImgLoaded] = useState(false);
-  const [frase] = useState(() => getFraseHero(estilo, card.corte?.nome));
+  const [frase] = useState(() => getFraseHero(estilo));
   const [sliderAtivo, setSliderAtivo] = useState(false);
   const corteNome = card.corte?.nome ?? card.corteNome ?? "";
   const isPending = card.status === "pending";
@@ -230,6 +245,16 @@ function HeroCard({ card, isFavorito, onFavoritar, onVariar, onVerDetalhe, estil
     </>
   );
 }
+
+HeroCard.propTypes = {
+  card: resultadoCardShape.isRequired,
+  isFavorito: PropTypes.bool,
+  onFavoritar: PropTypes.func,
+  onVariar: PropTypes.func,
+  onVerDetalhe: PropTypes.func,
+  estilo: PropTypes.string,
+  fotoBase64: PropTypes.string,
+};
 
 const heroStyles = `
   .hero-wrap {
@@ -690,10 +715,24 @@ export default function ScreenResultado({
   );
 }
 
+ScreenResultado.propTypes = {
+  usuario: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }),
+  fotoBase64: PropTypes.string,
+  rosto: PropTypes.string,
+  estilo: PropTypes.string,
+  servico: PropTypes.string,
+  cards: PropTypes.arrayOf(resultadoCardShape),
+  onGerarVariacoes: PropTypes.func,
+  onRetry: PropTypes.func,
+  onReiniciar: PropTypes.func,
+};
+
 // ── Lightbox ──────────────────────────────────────────────────
 function Lightbox({ card, isFavorito, onFavoritar, onVariar, onBaixar, onFechar, estilo }) {
   const corteNome = card.corte?.nome ?? card.corteNome ?? "";
-  const [frase] = useState(() => getFraseHero(estilo, corteNome));
+  const [frase] = useState(() => getFraseHero(estilo));
 
   useEffect(() => {
     const onKey = (e) => { if (e.key === "Escape") onFechar(); };
@@ -753,6 +792,16 @@ function Lightbox({ card, isFavorito, onFavoritar, onVariar, onBaixar, onFechar,
     </>
   );
 }
+
+Lightbox.propTypes = {
+  card: resultadoCardShape.isRequired,
+  isFavorito: PropTypes.bool,
+  onFavoritar: PropTypes.func,
+  onVariar: PropTypes.func,
+  onBaixar: PropTypes.func,
+  onFechar: PropTypes.func,
+  estilo: PropTypes.string,
+};
 
 // ── Estilos ───────────────────────────────────────────────────
 const screenStyles = `
