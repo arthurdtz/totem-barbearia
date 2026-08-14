@@ -12,6 +12,7 @@
 //   carregando    – boolean (buscando favoritos da API)
 // ─────────────────────────────────────────────────────────────
 
+import PropTypes from "prop-types";
 import { useEffect, useRef, useState, useCallback } from "react";
 
 // ── Ícones inline ─────────────────────────────────────────────
@@ -61,12 +62,12 @@ function formatarData(iso) {
 
 // ── Componente ────────────────────────────────────────────────
 export default function FavoritosDrawer({
-  aberto      = false,
-  onFechar    = () => {},
-  favoritos   = [],
-  onRemover   = () => {},
-  onVariar    = () => {},
-  carregando  = false,
+  aberto = false,
+  onFechar = () => { },
+  favoritos = [],
+  onRemover = () => { },
+  onVariar = () => { },
+  carregando = false,
 }) {
   // Controla qual item tem o menu de ações aberto (hover/tap)
   const [itemAtivo, setItemAtivo] = useState(null);
@@ -245,6 +246,32 @@ function FavoritoCard({ item, index, ativo, confirmando, onAtivar, onRemover, on
     </div>
   );
 }
+
+const favoritoShape = PropTypes.shape({
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  imagemBase64: PropTypes.string,
+  corteNome: PropTypes.string,
+  savedAt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+});
+
+FavoritosDrawer.propTypes = {
+  aberto: PropTypes.bool,
+  onFechar: PropTypes.func,
+  favoritos: PropTypes.arrayOf(favoritoShape),
+  onRemover: PropTypes.func,
+  onVariar: PropTypes.func,
+  carregando: PropTypes.bool,
+};
+
+FavoritoCard.propTypes = {
+  item: favoritoShape.isRequired,
+  index: PropTypes.number.isRequired,
+  ativo: PropTypes.bool,
+  confirmando: PropTypes.bool,
+  onAtivar: PropTypes.func,
+  onRemover: PropTypes.func,
+  onVariar: PropTypes.func,
+};
 
 // ── Estilos ───────────────────────────────────────────────────
 const drawerStyles = `
