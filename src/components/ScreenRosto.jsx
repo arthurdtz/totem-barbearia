@@ -1,5 +1,6 @@
 // src/components/ScreenRosto.jsx
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 const ROSTOS = [
   {
@@ -148,6 +149,11 @@ export default function ScreenRosto({ onRosto, onVoltar }) {
     </div>
   );
 }
+
+ScreenRosto.propTypes = {
+  onRosto: PropTypes.func.isRequired,
+  onVoltar: PropTypes.func.isRequired,
+};
 
 function ChevronLeft() {
   return (
