@@ -504,9 +504,11 @@ export default function ScreenResultado({
 
   useEffect(() => {
     if (cards.some(c => c.origemId) && variacaoRef.current) {
-      setTimeout(() => variacaoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 200);
+      setTimeout(() => {
+        variacaoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 200);
     }
-  }, [cards.length]);
+  }, [cards]);
 
   const handleFavoritar = useCallback(async (card) => {
     if (!usuario?.id || card.status !== "success") return;
@@ -514,7 +516,12 @@ export default function ScreenResultado({
     if (jaFavorito) {
       setFavoritosIds(prev => { const s = new Set(prev); s.delete(card.id); return s; });
       setFavoritos(prev => prev.filter(f => f.id !== card.id));
-      try { await removerFavorito(usuario.id, card.id); } catch { }
+      try {
+        await removerFavorito(usuario.id, card.id);
+      } catch (error) {
+        console.error("Failed to remove favorite:", error);
+      }
+
     } else {
       const item = {
         id: card.id,
@@ -527,14 +534,24 @@ export default function ScreenResultado({
       };
       setFavoritosIds(prev => new Set([...prev, card.id]));
       setFavoritos(prev => [item, ...prev]);
-      try { await salvarFavorito(usuario.id, item); } catch { }
+      try {
+        await salvarFavorito(usuario.id, item);
+      } catch (error) {
+        console.error("Failed to save favorite:", error);
+      }
+
     }
   }, [usuario?.id, favoritosIds, rosto, estilo, servico]);
 
   const handleRemoverFavorito = useCallback(async (id) => {
     setFavoritosIds(prev => { const s = new Set(prev); s.delete(id); return s; });
     setFavoritos(prev => prev.filter(f => f.id !== id));
-    try { await removerFavorito(usuario?.id, id); } catch { }
+    try {
+      await removerFavorito(usuario?.id, id);
+    } catch (error) {
+      console.error("Failed to remove favorite:", error);
+    }
+
   }, [usuario?.id]);
 
   const handleVariarFavorito = useCallback((itemFavorito) => {
