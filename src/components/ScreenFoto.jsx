@@ -5,6 +5,7 @@
 // Converte para base64 e repassa via onFoto().
 // ─────────────────────────────────────────────────────────────
 
+import PropTypes from "prop-types";
 import { useState, useRef, useCallback, useEffect } from "react";
 
 const MAX_DIM = 1024; // px — redimensiona para não estourar a API
@@ -229,6 +230,11 @@ export default function ScreenFoto({ onFoto, onVoltar }) {
     </div>
   );
 }
+
+ScreenFoto.propTypes = {
+  onFoto: PropTypes.func.isRequired,
+  onVoltar: PropTypes.func.isRequired,
+};
 
 // ── Ícones inline ─────────────────────────────────────────────
 function CameraIcon() {

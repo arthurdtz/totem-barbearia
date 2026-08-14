@@ -1,5 +1,6 @@
 // src/components/ScreenEstilo.jsx
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
+import PropTypes from "prop-types";
 
 const ESTILOS = [
   {
@@ -249,6 +250,11 @@ export default function ScreenEstilo({ onEstilo, onVoltar }) {
     </div>
   );
 }
+
+ScreenEstilo.propTypes = {
+  onEstilo: PropTypes.func.isRequired,
+  onVoltar: PropTypes.func.isRequired,
+};
 
 // ── Ícones ────────────────────────────────────────────────────
 function ChevronLeft() {

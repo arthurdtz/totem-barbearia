@@ -1,4 +1,5 @@
 // src/components/ScreenLogin.jsx
+import PropTypes from "prop-types";
 import { useState, useRef, useEffect } from "react";
 
 export default function ScreenLogin({ onLogin }) {
@@ -149,6 +150,10 @@ export default function ScreenLogin({ onLogin }) {
     </div>
   );
 }
+
+ScreenLogin.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+};
 
 function ArrowRight() {
   return (
