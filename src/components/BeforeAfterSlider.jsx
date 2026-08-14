@@ -13,6 +13,7 @@
 //   compact   – boolean (sem header/hint, para usar inline no card)
 // ─────────────────────────────────────────────────────────────
 
+import PropTypes from "prop-types";
 import { useState, useRef, useCallback, useEffect } from "react";
 
 export default function BeforeAfterSlider({
@@ -162,6 +163,13 @@ export default function BeforeAfterSlider({
     </div>
   );
 }
+
+BeforeAfterSlider.propTypes = {
+  antesSrc: PropTypes.string.isRequired,
+  depoisSrc: PropTypes.string.isRequired,
+  corteNome: PropTypes.string,
+  compact: PropTypes.bool,
+};
 
 const styles = `
   .bas-wrap {
