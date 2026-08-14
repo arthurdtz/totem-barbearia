@@ -2,6 +2,7 @@
 // Overlay fullscreen que aparece enquanto todos os cards estão pending.
 // Recebe: fotoBase64, estilo, onDismiss (chamado quando sumir)
 
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 
 const MENSAGENS = [
@@ -21,9 +22,9 @@ const STEPS = [
   "Geração da imagem",
 ];
 
-export default function LoadingCinematografico({ fotoBase64, estilo, visivel }) {
-  const [msgIdx,    setMsgIdx]    = useState(0);
-  const [stepIdx,   setStepIdx]   = useState(0);
+export default function LoadingCinematografico({ fotoBase64, visivel }) {
+  const [msgIdx, setMsgIdx] = useState(0);
+  const [stepIdx, setStepIdx] = useState(0);
   const [progresso, setProgresso] = useState(0);
 
   // Rotaciona mensagens a cada 2.2s
@@ -78,10 +79,10 @@ export default function LoadingCinematografico({ fotoBase64, estilo, visivel }) 
               left: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 4}s`,
               animationDuration: `${3 + Math.random() * 4}s`,
-              width:  `${2 + Math.random() * 3}px`,
+              width: `${2 + Math.random() * 3}px`,
               height: `${2 + Math.random() * 3}px`,
               opacity: 0.3 + Math.random() * 0.4,
-            }}/>
+            }} />
           ))}
         </div>
 
@@ -138,6 +139,11 @@ export default function LoadingCinematografico({ fotoBase64, estilo, visivel }) 
     </>
   );
 }
+
+LoadingCinematografico.propTypes = {
+  fotoBase64: PropTypes.string,
+  visivel: PropTypes.bool.isRequired,
+};
 
 const css = `
   .lc-root {
