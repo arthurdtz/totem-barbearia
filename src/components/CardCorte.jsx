@@ -17,6 +17,7 @@
 //   index          – número (0,1,2…) para stagger da animação
 // ─────────────────────────────────────────────────────────────
 
+import PropTypes from "prop-types";
 import { useState, useRef, useEffect, useCallback } from "react";
 
 // ── Ícones inline (sem dependência extra) ────────────────────
@@ -26,6 +27,10 @@ const IconHeart = ({ filled }) => (
     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
   </svg>
 );
+
+IconHeart.propTypes = {
+  filled: PropTypes.bool,
+};
 
 const IconShuffle = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -257,6 +262,30 @@ export default function CardCorte({
     </>
   );
 }
+
+const corteShape = PropTypes.shape({
+  nome: PropTypes.string,
+  subtitulo: PropTypes.string,
+});
+
+CardCorte.propTypes = {
+  card: PropTypes.shape({
+    status: PropTypes.oneOf(["pending", "loading", "success", "error"]),
+    imagemBase64: PropTypes.string,
+    origemId: PropTypes.string,
+    corteNome: PropTypes.string,
+    corte: corteShape,
+    corteObj: corteShape,
+    semCota: PropTypes.bool,
+    erro: PropTypes.string,
+  }).isRequired,
+  isFavorito: PropTypes.bool,
+  onFavoritar: PropTypes.func,
+  onVariar: PropTypes.func,
+  onRetry: PropTypes.func,
+  onVerDetalhe: PropTypes.func,
+  index: PropTypes.number,
+};
 
 // ── CSS-in-JS (escopo isolado com prefixo bc-) ───────────────
 const cardStyles = `
