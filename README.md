@@ -5,10 +5,14 @@ A full-stack web application that helps barbershop clients explore hairstyle and
 > Built as an in-store totem concept and evolved into a virtual visagist experience.
 
 <p align="center">
-  <img src="docs/screenshots/home.png" alt="Home screen of Bravos Barbearia" width="30%" />
-  <img src="docs/screenshots/style-selection.png" alt="Hairstyle selection screen" width="30%" />
-  <img src="docs/screenshots/result.png" alt="AI-generated hairstyle preview" width="30%" />
+  <img src="docs/screenshots/home.png" alt="Home screen of Bravos Barbearia" width="47%" />
+  <img src="docs/screenshots/style-selection.png" alt="Hairstyle selection screen" width="47%" />
 </p>
+
+<p align="center">
+  <img src="docs/screenshots/result.png" alt="AI-generated hairstyle preview" width="70%" />
+</p>
+
 
 ## Features
 
