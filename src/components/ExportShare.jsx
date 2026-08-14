@@ -15,6 +15,7 @@
 //   variante    – "inline" | "compact"  (estilo dos botões)
 // ─────────────────────────────────────────────────────────────
 
+import PropTypes from "prop-types";
 import { useState, useCallback, useRef } from "react";
 
 // Dimensões do card de export (formato story / 4:5)
@@ -289,6 +290,12 @@ export default function ExportShare({
         </div>
     );
 }
+ExportShare.propTypes = {
+    imagemSrc: PropTypes.string.isRequired,
+    corteNome: PropTypes.string,
+    frase: PropTypes.string,
+    variante: PropTypes.oneOf(["inline", "compact"]),
+};
 
 const styles = `
   .es-wrap {
