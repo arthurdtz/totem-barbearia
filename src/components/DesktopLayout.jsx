@@ -8,6 +8,8 @@
 // Não altera a lógica interna de nenhuma tela.
 // ─────────────────────────────────────────────────────────────
 
+import PropTypes from "prop-types";
+
 const STEPS = [
   { num: 1, label: "Foto", desc: "Envie uma selfie de frente" },
   { num: 2, label: "Rosto", desc: "Informe seu formato de rosto" },
@@ -103,6 +105,12 @@ export default function DesktopLayout({ tela, children }) {
     </>
   );
 }
+
+DesktopLayout.propTypes = {
+  tela: PropTypes.oneOf(["foto", "rosto", "estilo", "resultado"]).isRequired,
+  children: PropTypes.node.isRequired,
+};
+
 
 // ── CSS ───────────────────────────────────────────────────────
 const css = `
