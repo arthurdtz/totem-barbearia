@@ -5,45 +5,45 @@ const ROSTOS = [
   {
     id: "oval", nome: "Oval",
     dica: "Aceita quase todos os estilos — considere-se sortudo.",
-    svg: <ellipse cx="40" cy="44" rx="24" ry="32" stroke="var(--gold)" strokeWidth="1.5" fill="none"/>,
+    svg: <ellipse cx="40" cy="44" rx="24" ry="32" stroke="var(--gold)" strokeWidth="1.5" fill="none" />,
   },
   {
     id: "quadrado", nome: "Quadrado",
     dica: "Textura e camadas no topo alongam o visual.",
-    svg: <rect x="16" y="14" width="48" height="52" rx="10" ry="10" stroke="var(--gold)" strokeWidth="1.5" fill="none"/>,
+    svg: <rect x="16" y="14" width="48" height="52" rx="10" ry="10" stroke="var(--gold)" strokeWidth="1.5" fill="none" />,
   },
   {
     id: "redondo", nome: "Redondo",
     dica: "Volume no alto e laterais mais curtas definem o rosto.",
-    svg: <circle cx="40" cy="40" r="28" stroke="var(--gold)" strokeWidth="1.5" fill="none"/>,
+    svg: <circle cx="40" cy="40" r="28" stroke="var(--gold)" strokeWidth="1.5" fill="none" />,
   },
   {
-    id: "triangulo", nome: "Triângulo",
+    id: "triangular", nome: "Triângulo",
     dica: "Volume no topo equilibra a testa mais larga.",
-    svg: <path d="M40 10 L66 70 L14 70 Z" stroke="var(--gold)" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>,
+    svg: <path d="M40 10 L66 70 L14 70 Z" stroke="var(--gold)" strokeWidth="1.5" fill="none" strokeLinejoin="round" />,
   },
   {
-    id: "diamante", nome: "Diamante",
+    id: "losango", nome: "Diamante",
     dica: "Franja lateral suaviza as maçãs proeminentes.",
-    svg: <path d="M40 10 L66 40 L40 70 L14 40 Z" stroke="var(--gold)" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>,
+    svg: <path d="M40 10 L66 40 L40 70 L14 40 Z" stroke="var(--gold)" strokeWidth="1.5" fill="none" strokeLinejoin="round" />,
   },
   {
-    id: "retangulo", nome: "Retângulo",
+    id: "oblongo", nome: "Retângulo",
     dica: "Laterais com textura e topo sem muito volume harmonizam.",
-    svg: <rect x="20" y="8" width="40" height="64" rx="8" ry="8" stroke="var(--gold)" strokeWidth="1.5" fill="none"/>,
+    svg: <rect x="20" y="8" width="40" height="64" rx="8" ry="8" stroke="var(--gold)" strokeWidth="1.5" fill="none" />,
   },
 ];
 
 const TIPOS_CABELO = [
-  { id: "liso",     nome: "Liso",     emoji: "〜", desc: "Sem ondas, cabelo reto" },
+  { id: "liso", nome: "Liso", emoji: "〜", desc: "Sem ondas, cabelo reto" },
   { id: "ondulado", nome: "Ondulado", emoji: "≋", desc: "Ondas suaves naturais" },
-  { id: "crespo",   nome: "Crespo",   emoji: "﹏", desc: "Cachos definidos" },
-  { id: "afro",     nome: "Afro",     emoji: "✦", desc: "Volume natural, Black" },
+  { id: "crespo", nome: "Crespo", emoji: "﹏", desc: "Cachos definidos" },
+  { id: "afro", nome: "Afro", emoji: "✦", desc: "Volume natural, Black" },
 ];
 
 export default function ScreenRosto({ onRosto, onVoltar }) {
-  const [formato,     setFormato]     = useState(null);
-  const [tipoCabelo,  setTipoCabelo]  = useState(null);
+  const [formato, setFormato] = useState(null);
+  const [tipoCabelo, setTipoCabelo] = useState(null);
 
   const podeAvancar = !!formato && !!tipoCabelo;
 
@@ -86,9 +86,9 @@ export default function ScreenRosto({ onRosto, onVoltar }) {
                 <svg viewBox="0 0 80 80" style={s.svgRosto} xmlns="http://www.w3.org/2000/svg">
                   {r.svg}
                   {ativo && <>
-                    <circle cx="28" cy="32" r="2" fill="rgba(201,168,76,0.5)"/>
-                    <circle cx="52" cy="32" r="2" fill="rgba(201,168,76,0.5)"/>
-                    <line x1="28" y1="52" x2="52" y2="52" stroke="rgba(201,168,76,0.3)" strokeWidth="1" strokeDasharray="3 2"/>
+                    <circle cx="28" cy="32" r="2" fill="rgba(201,168,76,0.5)" />
+                    <circle cx="52" cy="32" r="2" fill="rgba(201,168,76,0.5)" />
+                    <line x1="28" y1="52" x2="52" y2="52" stroke="rgba(201,168,76,0.3)" strokeWidth="1" strokeDasharray="3 2" />
                   </>}
                 </svg>
                 <span style={s.nomeRosto}>{r.nome}</span>
@@ -152,21 +152,21 @@ export default function ScreenRosto({ onRosto, onVoltar }) {
 function ChevronLeft() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="15 18 9 12 15 6"/>
+      <polyline points="15 18 9 12 15 6" />
     </svg>
   );
 }
 function ArrowRight() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M5 12h14M12 5l7 7-7 7"/>
+      <path d="M5 12h14M12 5l7 7-7 7" />
     </svg>
   );
 }
 function CheckIcon() {
   return (
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#08080A" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="20 6 9 17 4 12"/>
+      <polyline points="20 6 9 17 4 12" />
     </svg>
   );
 }
